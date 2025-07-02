@@ -55,7 +55,7 @@ export default function Home() {
                 </Link>
               </div>
             ))}
-          </div> : null}
+          </div> : <h2 className="italic text-3xl font-bold text-center">You Dont have any post. Create post</h2>}
 
       </div>
 

@@ -4,29 +4,30 @@ import { ArrowLeft, Save } from 'lucide-react';
 import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 import toast from 'react-hot-toast';
+import Link from "next/link"
 
 function page() {
   const router = useRouter()
   const [loading, setLoading] = useState(false);
-    const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState({
     title: "",
     description: "",
-    author:"",
+    author: "",
   })
 
-   const handleChange = (e) => {
-    
+  const handleChange = (e) => {
+
     const { name, value } = e.target
     // setFormData((prev) => ({ ...prev, [name]: value }))   
     // OR
-      setFormData({ ...formData, [name]: value });
+    setFormData({ ...formData, [name]: value });
   }
 
-  const handleSubmit = async (e) => { 
-   
+  const handleSubmit = async (e) => {
+
     try {
       e.preventDefault();
-    
+
       setLoading(true)
       await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/posts`, formData)
       toast.success("Post created successfully!")
@@ -40,7 +41,7 @@ function page() {
   return (
     <div className="max-w-2xl mx-auto">
       <h1 className="text-3xl font-bold mb-6">Create New Post</h1>
-      <div  className="card">
+      <div className="card">
         <div className="mb-4">
           <label htmlFor="title" className="block mb-2 font-medium">
             Title <span className="text-red-500">*</span>
@@ -53,9 +54,9 @@ function page() {
             onChange={handleChange}
             className={`input `}
             placeholder="Enter post title"
-           
+
           />
-       
+
         </div>
 
         <div className="mb-4">
@@ -70,9 +71,9 @@ function page() {
             onChange={handleChange}
             className={`input`}
             placeholder="Enter author name"
-       
+
           />
-        
+
         </div>
 
         <div className="mb-6">
@@ -86,7 +87,7 @@ function page() {
             onChange={handleChange}
             className="input min-h-[150px]"
             placeholder="Enter post description"
-         
+
           />
         </div>
 
@@ -95,10 +96,12 @@ function page() {
             <Save size={18} />
             Create Post
           </button>
-          <button type="button" onClick={() => router.back()} className="btn btn-secondary flex items-center gap-2">
-            <ArrowLeft size={18} />
-            Cancel
-          </button>
+          <Link href="/">
+            <button type="button" onClick={() => router.back()} className="btn btn-secondary flex items-center gap-2">
+              <ArrowLeft size={18} />
+              Cancel
+            </button>
+          </Link>
         </div>
       </div>
 
